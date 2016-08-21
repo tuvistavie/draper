@@ -51,8 +51,10 @@ module Draper
 
     console do
       require 'action_controller/test_case'
-      ApplicationController.new.view_context
-      Draper::ViewContext.build
+      if ApplicationController.is_a?(ActionController::Base)
+        ApplicationController.new.view_context
+        Draper::ViewContext.build
+      end
     end
 
     rake_tasks do
